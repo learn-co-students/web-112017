@@ -39,7 +39,7 @@ ActiveRecord::Base.establish_connection(
   }
 )
 
-
+require_relative "../lib/dr/dynamic_record"
 require_relative '../lib/post'
 require_relative '../lib/author'
 

@@ -3,9 +3,9 @@ Bundler.require
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
-  :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
+  :database => "db/dev.sqlite"
 )
 
-ActiveRecord::Base.logger = Logger.new(STDOUT) 
+ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 require_all 'app'

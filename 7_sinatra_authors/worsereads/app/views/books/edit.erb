@@ -1,0 +1,10 @@
+<form action="/books/<%= @book.id %>" method="post">
+    <input type="hidden" name="_method" value="patch" />
+    <input type="text" name="book[name]" placeholder="Name" value="<%= @book.name %>" />
+    <input type="text" name="book[description]" placeholder="Description" value="<%= @book.description %>" />
+    <input type="submit" value="Edit Book"/>
+</form>
+<form action="/books/<%= @book.id %>" method="post">
+  <input type="hidden" name="_method" value="delete" />
+  <input type="submit" value="Delete Book"/>
+</form>

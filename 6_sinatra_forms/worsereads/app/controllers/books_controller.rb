@@ -29,9 +29,6 @@ class BooksController < ApplicationController
   post "/books" do
     # params -> { name: Musketeers}
     @book = Book.create(params)
-
-
-    erb :"books/create"
     redirect "/books/#{@book.id}"
   end
 
@@ -43,17 +40,15 @@ class BooksController < ApplicationController
   end
 
 
-
-
   get "/books/:id/edit" do # I want to edit this book
     @book = Book.find(params[:id]) # go ask db about book at id
     erb :"/books/edit"
   end
 
+  patch "/books/:id" do
 
-
-
-
+    binding.pry
+  end
 
 
 

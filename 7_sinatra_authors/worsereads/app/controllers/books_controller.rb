@@ -13,6 +13,7 @@ class BooksController < ApplicationController
   # IF we have specific routes they should go on top
   get "/books/new" do # I want to create a book
     # no db here
+    @authors = Author.all
     erb :"books/new" # show a form
   end
 
@@ -44,7 +45,7 @@ class BooksController < ApplicationController
 
   delete "/books/:id" do
     @book = Book.find(params[:id])
-    @book.destroy()
+    @book.destroy
 
     redirect "/books"
   end

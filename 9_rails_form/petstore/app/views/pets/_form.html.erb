@@ -1,0 +1,6 @@
+<%= form_for @pet do |f| %>
+  <%= f.text_field :name, placeholder: "Name" %>
+  <%= f.text_field :breed, placeholder: "Breed" %>
+  <%= f.number_field :price, placeholder: "Price" %>
+  <%= f.submit %>
+<% end %>

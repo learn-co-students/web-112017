@@ -1,0 +1,16 @@
+<!-- <%= form_tag songs_path do %>
+  <%= text_field_tag :'song[title]' %>
+
+  <%= text_field_tag :'song[runtime]' %>
+  <%= submit_tag "Create Song" %>
+<% end %> -->
+
+<%= form_for @song do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :runtime %>
+  <%= f.text_field :runtime %>
+  <%= f.submit %>
+<% end %>
+
+

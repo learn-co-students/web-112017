@@ -1,7 +1,19 @@
 <div>
-  <%= form_for @gift do |f| %>
-    <%= f.text_field :product_name %>
-    <%= f.text_area :description %>
-    <%= f.submit %>
-  <% end %>
+    <% if flash[:error] %>
+      <ul>
+        <% flash[:error].each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    <% end %>
 </div>
+
+<%= form_for @gift do |f| %>
+
+  <%= f.text_field :name, placeholder: "Name" %>
+  <%= f.number_field :rating, placeholder: "Rating" %>
+  <%= f.text_field :description, placeholder: "Description" %>
+  <%= f.text_field :user_name %>
+  <%= f.collection_select :user_id, @users, :id, :username, prompt: true %>
+  <%= f.submit %>
+<% end %>

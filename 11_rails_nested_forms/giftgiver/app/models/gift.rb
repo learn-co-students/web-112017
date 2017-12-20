@@ -1,4 +1,10 @@
 class Gift < ApplicationRecord
-  validates :product_name, presence: true
-  validates :description, presence: true 
+  belongs_to :user
+
+  def user_name
+  end
+
+
+  def user_name=(val)
+  end
 end

@@ -1,7 +1,9 @@
 <div>
-  <p><%= @gift.product_name %> | <%= @gift.description %></p>
+  <p><%= @gift.name %></p>
+  <p><%= @gift.rating %></p>
+  <p><%= @gift.description %></p>
 </div>
 
 
 
-<p><%= link_to "All Gifts", gifts_path %></p>
+<%= link_to "Go to User", @gift.user %>

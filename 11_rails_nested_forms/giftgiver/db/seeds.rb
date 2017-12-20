@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+
+20.times do
+  User.create(username: Faker::Name.name)
+end
+
+100.times do
+  Gift.create(name: Faker::Cat.name, description: Faker::Cat.breed, rating: 10, user: User.all.sample)
+end

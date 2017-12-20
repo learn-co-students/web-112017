@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220050053) do
+ActiveRecord::Schema.define(version: 20171220155013) do
 
   create_table "gifts", force: :cascade do |t|
-    t.string "product_name"
+    t.string "name"
+    t.integer "rating"
+    t.string "description"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
+    t.index ["user_id"], name: "index_gifts_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

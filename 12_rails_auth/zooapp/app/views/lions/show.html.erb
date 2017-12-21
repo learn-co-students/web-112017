@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @lion.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @lion.user.username %>
+</p>
+
+<%= link_to 'Edit', edit_lion_path(@lion) %> |
+<%= link_to 'Back', lions_path %>

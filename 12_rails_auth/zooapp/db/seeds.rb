@@ -8,12 +8,7 @@
 
 
 
+100.times do
+  Lion.create(name: Faker::Cat.name, user: User.all.sample)
 
-20.times do
-  User.create(username: Faker::Name.name)
-  Item.create(name: Faker::Cat.name, price: rand(1...100))
-end
-
-50.times do
-  @user = User.all.sample.items << Item.all.sample
 end

@@ -5,6 +5,7 @@ class CreateGifts < ActiveRecord::Migration[5.1]
       t.integer :rating
       t.string :description
       t.belongs_to :user, foreign_key: true
+      t.belongs_to :item, foreign_key: true 
 
       t.timestamps
     end

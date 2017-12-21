@@ -1,7 +1,7 @@
 <%= @user.username %>
 
 <ul>
-  <% @user.gifts.each do |gift| %>
-    <li><%= link_to gift.name, gift %></li>
+  <% @user.items.each do |item| %>
+    <li><%= link_to item.name, item %></li>
   <% end %>
 </ul>

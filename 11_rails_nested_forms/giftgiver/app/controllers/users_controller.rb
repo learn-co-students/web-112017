@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   # /users/new GET
   def new
     @user = User.new
+    @items = Item.all
   end
 
   # /users POST
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, item_ids:[])
     end
 
 

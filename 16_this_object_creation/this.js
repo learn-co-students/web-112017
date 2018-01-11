@@ -49,3 +49,23 @@ const arrowWithOneParameter = name => { console.log(this) }
 const arrowWithNoParameters = () => { console.log(this) }
 const arrowWithTwoParameters = (name, age) => { console.log(this) }
 const arrowReturningObject = (name, age) => ({ name, age })
+
+
+Array.prototype.each = function(callback, context) {
+	for (let i = 0; i < this.length; i++) {
+		const el = this[i]
+		const currArr = this
+
+		// baseless function call
+		// `this` is set to Window
+		callback.call(context, el, i, currArr)
+	}
+}
+
+[1,2,3].each(function(el, i, arr) {
+	console.log(el, this[i])
+}, [9,8,7])
+
+[1,2,3].each(function(el, i, arr) {
+	console.log(el, this[i])
+}.bind([9,8,7]))

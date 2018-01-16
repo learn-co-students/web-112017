@@ -1,13 +1,19 @@
-document.addEventListener('DOMContentLoaded', function(DOMContentLoadedEvent) {
-  // create unique lists
-  let listId = 0
+class App {
+  static init() {
+    // add event listener to listen for submit events on new task form
+    const taskForm = document.getElementById('create-task-form')
+    taskForm.addEventListener('submit', App.handleCreateTask)
 
-  // if there's not one list, hide task form
-  const taskForm = document.getElementById('create-task-form')
-  taskForm.style.display = 'none'
+    // add event listener to listen for submit events on new list form
+    const listForm = document.getElementById('create-list-form')
+    listForm.addEventListener('submit', App.handleCreateList)
 
-  // add event listener to listen for submit events on new task form
-  taskForm.addEventListener('submit', function(event) {
+    // add event listener to listen for delete
+    const listSection = document.getElementById('lists')
+    listSection.addEventListener('click', App.handleDeleteList)
+  }
+
+  static handleCreateTask(event) {
     // don't refresh the page
     event.preventDefault()
 
@@ -22,59 +28,55 @@ document.addEventListener('DOMContentLoaded', function(DOMContentLoadedEvent) {
 
     // add a new task to the chosen list
     document.getElementById(newTaskList.value).querySelector('ul').append(newTask)
-  })
+  }
 
-  // add event listener to listen for submit events on new list form
-  const listForm = document.getElementById('create-list-form')
-  listForm.addEventListener('submit', function(event) {
-    ++listId
-
+  static handleCreateList(event) {
     // don't refresh the page
     event.preventDefault()
 
     // if there's at least one list, display task form
-    taskForm.style.display = 'block'
+    App.displayTaskForm()
 
-    // add an option to the list in the task form
+    // creating a new list instance
     const newListTitle = document.getElementById('new-list-title')
-    const listSelect = taskForm.querySelector('#parent-list')
-    const newOption = document.createElement('option')
-    newOption.value = listId
-    newOption.innerText = newListTitle.value
-    listSelect.append(newOption)
-
-    // show a new list on the page
-    const newList = document.createElement('div')
-    newList.className = "list"
-    newList.id = listId
-    const newListH2 = document.createElement('h2')
-    const newListUl = document.createElement('ul')
-    const newListDeleteButton = document.createElement('button')
-    newListDeleteButton.className = 'delete-list'
-    newListDeleteButton.innerText = 'X'
-    newListH2.append(newListDeleteButton)
-    newListH2.append(newListTitle.value)
-    newList.append(newListH2)
-    newList.append(newListUl)
-    const allLists = document.getElementById('lists')
-    allLists.append(newList)
+    const list = new List(newListTitle.value)
 
     // clear the input
     newListTitle.value = ''
 
-    // add functionality to delete a list
-    newListDeleteButton.addEventListener('click', function(event) {
+    // add an option to the list in the task form
+    const listSelect = document.querySelector('#parent-list')
+    listSelect.append(list.optionTemplate())
+
+    // show a new list on the page
+    const allLists = document.getElementById('lists')
+    allLists.append(list.divTemplate())
+  }
+
+  static handleDeleteList(event) {
+    if (event.target.className === 'delete-list') {
+      // find the id of the list to delete
+      const listDiv = event.target.parentNode.parentNode
+      const listId = listDiv.id
+      const listOption = document.querySelector(`option[value="${listId}"]`)
+
       // remove list div from page
-      event.target.parentNode.parentNode.remove()
+      listDiv.remove()
 
       // remove list option from dropdown
-      newOption.remove()
+      listOption.remove()
 
       // if there are no lists, then hide the task create form
-      if (!allLists.children.length) {
-        taskForm.style.display = 'none'
+      if (!document.getElementById('lists').children.length) {
+        App.displayTaskForm(false)
       }
-    })
-  })
+    }
+  }
 
-});
+  static displayTaskForm(hide = true) {
+    const taskForm = document.getElementById('create-task-form')
+    taskForm.style.display = hide ? 'block' : 'none'
+  }
+}
+
+document.addEventListener('DOMContentLoaded', App.init);

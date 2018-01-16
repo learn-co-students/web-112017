@@ -5,6 +5,8 @@
   <title>Flatiron Task Lister</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
+  <script src="src/list.js"></script>
+  <script src="src/index.js"></script>
 </head>
 <body>
   <div id="main-content">
@@ -16,7 +18,7 @@
       <input type="submit" value="Create New List">
     </form><!-- #create-list-form -->
 
-    <form id="create-task-form" action="#" method="post">
+    <form id="create-task-form" action="#" method="post" style="display: none">
       <label for="parent-list">Select List:</label>
       <select id="parent-list" name="parent-list"></select>
       <label for="new-task-description">Task description:</label>
@@ -35,10 +37,6 @@
       </div> -->
     </section>
 
-
-    <script src="src/index.js"></script>
-    <script src="src/task.js"></script>
-    <script src="src/list.js"></script>
   </div><!-- #main-content -->
 </body>
 </html>

@@ -18,16 +18,15 @@ class App {
     event.preventDefault()
 
     // get task list description and priority
-    const newTaskList = document.getElementById('parent-list')
-    const newTaskDescription = document.getElementById('new-task-description')
-    const newTaskPriority = document.getElementById('new-task-priority')
+    const newTaskListId = document.getElementById('parent-list').id
+    const newTaskDescription = document.getElementById('new-task-description').value
+    const newTaskPriority = document.getElementById('new-task-priority').value
 
     // build new task
-    const newTask = document.createElement('li')
-    newTask.innerHTML = `Task: ${newTaskDescription.value} <br> Priority: ${newTaskPriority.value}`
+    const task = new Task(newTaskListId, newTaskDescription, newTaskPriority)
 
     // add a new task to the chosen list
-    document.getElementById(newTaskList.value).querySelector('ul').append(newTask)
+    document.getElementById(newTaskList.value).querySelector('ul').append(task.itemTemplate())
   }
 
   static handleCreateList(event) {

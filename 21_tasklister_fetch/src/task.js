@@ -1,5 +1,6 @@
 class Task {
-  constructor(listId, description, priority) {
+  constructor({id, listId, description, priority}) {
+    this.id = id
     this.listId = listId
     this.description = description
     this.priority = priority

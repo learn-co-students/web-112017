@@ -17,18 +17,37 @@ class App {
     // don't refresh the page
     event.preventDefault()
 
+    // GET INFORMATION FROM THE USER
     // get task list description and priority
     const newTaskListId = document.getElementById('parent-list').value
     const newTaskDescription = document.getElementById('new-task-description').value
     const newTaskPriority = document.getElementById('new-task-priority').value
 
+    // DO SOMETHING WITH THAT INFORMATION
     // build new task
-    const task = new Task(newTaskListId, newTaskDescription, newTaskPriority)
 
-    // add a new task to the chosen list
-    document.getElementById(newTaskListId)
-      .querySelector('ul')
-      .append(task.itemTemplate())
+    fetch({
+      url: 'http://localhost:3000/tasks',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', // what kind of data am i sending?
+        'Accept': 'application/json' // what kind of data do i want back?
+      },
+      body: JSON.stringify({ // pass the data
+        description: newTaskDescription,
+        priority: newTaskPriority,
+        listId: newTaskListId
+      })
+    }).then(res => res.json())
+      .then(taskData => {
+        const task = new Task(taskData)
+
+        // RENDER SOMETHING
+        // add a new task to the chosen list
+        document.getElementById(newTaskListId)
+          .querySelector('ul')
+          .append(task.itemTemplate())
+      })
   }
 
   static handleCreateList(event) {

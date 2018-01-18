@@ -5,15 +5,14 @@
 There is a threat to world peace. Someone has stolen all the code to make to-do lists in the browser and productivity is down across all non-developers in the world! We have faith in you, but we need you to follow the steps outline below carefully. **Your objective is to build 19 to-do list applications (one for each agent) to replace all the versions that were stolen.** _Don't do anything to risk the mission._
 
 ## Technical Briefing
-You will use your technical and creative ability to develop a front-end application which accomplishes these goals. We just need an MVP, so each of you will be given _one list_, and your job is to build the following features on the front-end with persistence to the back-end:
-  * Display all tasks from your list
-  * Add a task to your list
+You will use your technical and creative ability to develop a front-end application which accomplishes these goals. We just need an MVP and your job is to build the following features on the front-end with persistence to the back-end:
+  * Display all tasks
+  * Add a task
   * Check a task as complete
-  * Remove a task from your list
-
+  * Remove a task
 
 ### You will be given...
-...a GitHub repository to clone down with some starter code with a base template to develop from. You can start by writing all of your code in `src/index.js`, but _as you refactor, you'll have to create more files in the `src` directory_.
+...a GitHub repository to clone down with some starter code with a base template to develop from. You can start by writing all of your code in `front-end/src/index.js`, but _as you refactor, you'll have to create more files in the `front-end/src` directory_.
 
 ...a back-end already built out for you. To get the Rails server running, `cd` into the `secretlister` folder and run `rails db:migrate` and `rails s`. The routes are as follows:
 

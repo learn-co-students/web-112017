@@ -4,7 +4,7 @@
 document.getElementById('github-search').addEventListener('submit', function(e) {
   e.preventDefault()
 
-  const username = document.querySelector('input[type="text"]')[0].value
+  const username = document.querySelector('input[type="text"]').value
 
   getUser(username);
 });

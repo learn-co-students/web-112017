@@ -21,7 +21,7 @@ const myCreateElement = (type, props = {}, children) => {
   return {
     $$typeof: Symbol.for('react.element'),
     type: type,
-    props: { children: children },
+    props: { children: children, ...props },
     ref: null
   };
 };
@@ -34,7 +34,7 @@ Use `myCreateElement` to create a function that generates React elements with th
 ```html
 <!-- how the article should look -->
 <h1 class="article-heading">My article title</h1>
-<p class="article-main">My article text</h1>
+<p class="article-main">My article text</p>
 ```
 
 ```js

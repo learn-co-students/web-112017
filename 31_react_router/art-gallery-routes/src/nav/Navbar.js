@@ -1,18 +1,22 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
 
-  const links = ['Login', 'Paintings', 'New'].map(l => <li><a href="">{l}</a></li>)
+  const links = ['Login', 'Paintings', 'New'].map(l => <li key={l}><a href="">{l}</a></li>)
 
   return (
     <nav>
       <div className="nav-wrapper">
-        <a className="brand-logo left">Art Gallery</a>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
-          { links }
+        <a href="#" className="brand-logo">Art Gallery</a>
+        <ul id="nav-mobile" className="right">
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/paintings">Paintings</Link></li>
+          <li><Link to="/paintings/new">New</Link></li>
         </ul>
       </div>
-    </nav>)
+    </nav>
+  )
 }
 
 

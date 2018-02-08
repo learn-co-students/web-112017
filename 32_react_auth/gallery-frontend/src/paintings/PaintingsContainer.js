@@ -3,18 +3,24 @@ import PaintingsSearch from './PaintingsSearch'
 import PaintingsList from './PaintingsList'
 import PaintingItem from './PaintingItem'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import api from '../api/adapter'
+
 
 class PaintingsContainer extends React.Component {
+  state = {
+    filter: {
+      filterName: "",
+      filterDate: ""
+    },
+    paintings: []
+  }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      filter: {
-        filterName: "",
-        filterDate: ""
-      }
-    }
+  componentDidMount() {
+    api.paintings.getPaintings().then(painting_data => {
+      this.setState({
+        paintings: painting_data
+      })
+    })
   }
 
   setFilter = (f) => {
@@ -30,7 +36,7 @@ class PaintingsContainer extends React.Component {
         <Route path="/paintings/new" component={ NewPaintingForm } />
         <Route path="/paintings/:id" render={ (routerProps) => {
           const id = parseInt(routerProps.match.params.id)
-          const painting = this.props.paintings.find((p) => p.id === id)
+          const painting = this.state.paintings.find((p) => p.id === id)
           if (painting) {
             return <PaintingItem painting={painting} />
           } else {
@@ -40,7 +46,7 @@ class PaintingsContainer extends React.Component {
         <Route path="/paintings" render={ (props) => {
           return (<div className="paintings-container">
             <PaintingsSearch setFilter={ this.setFilter } />
-            <PaintingsList paintings={ this.props.paintings } filter={this.state.filter} />
+            <PaintingsList paintings={ this.state.paintings } filter={this.state.filter} />
           </div>)
         } } />
       </Switch>

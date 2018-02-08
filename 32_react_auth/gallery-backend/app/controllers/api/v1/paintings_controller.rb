@@ -10,13 +10,5 @@ class Api::V1::PaintingsController < ApplicationController
     render json: @painting
   end
 
-  def create
-
-  end
-
-  def update
-
-  end
-
 
 end

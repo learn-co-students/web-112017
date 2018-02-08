@@ -8,6 +8,7 @@ const Navbar = (props) => {
   return (
     <nav>
       <div className="nav-wrapper">
+        <Link to="/" className="brand-logo">Art gallery</Link>
         <ul id="nav-mobile" className="right">
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/paintings">Paintings</Link></li>

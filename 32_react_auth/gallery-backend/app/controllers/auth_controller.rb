@@ -1,23 +1,29 @@
 class AuthController < ApplicationController
 
   def login
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      render json: { id: user.id, username: user.username }
-    else
-      render json: { error: "No user or invalid password"}, status: 401
+    begin
+      user = login_user(params[:username], params[:password])
+      render json: {
+        id: user.id,
+        username: user.username,
+        token: encode_token({'user_id': user.id})
+      }
+    rescue AuthError => e
+      render json: { error: e.msg }, status: 401
     end
   end
 
   def currentUser
-    token = request.headers['Authorization']
-    user = User.find(token)
+    user = current_user
     if user
       render json: { id: user.id, username: user.username }
     else
-      render json: Nil
+      render json: nil
     end
   end
 
-
+  def signup
+    user = User.create(username: params[:username], password: params[:password])
+    
+  end
 end

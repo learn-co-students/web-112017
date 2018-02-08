@@ -7,6 +7,7 @@ import Login from './nav/Login'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import api from './api/adapter'
 
+
 const CatchAll = (props) => {
   return (<h1> 404 ALERT </h1>)
 }
@@ -23,18 +24,33 @@ class App extends Component {
   }
 
   setLoggedInUser = (user) => {
-    localStorage.setItem('token', user.id)
+    localStorage.setItem('token', user.token)
     this.setState({
-      auth: { currentUser: user }
+      auth: { currentUser: {
+        username: user.username,
+        id: user.id
+      } }
     })
+  }
+
+  removeLoggedInUser = () => {
+    localStorage.setItem('token', null)
+    this.setState({
+      auth: { currentUser: null }
+    })
+    window.history.pushState({}, null, "/login")
   }
 
   componentDidMount() {
     const token = localStorage.getItem('token');
     if (token) {
       api.auth.getLoggedInUser().then(user => {
-        console.log("got user")
-        this.setState({ auth: { currentUser: user} })
+        if (user) {
+          this.setState({ auth: { currentUser: user} })
+          console.log(`user: ${user.username}`)
+        } else {
+          this.setState({ auth: { currentUser: null } })
+        }
       })
     } else {
       console.log('no token!')
@@ -44,13 +60,13 @@ class App extends Component {
   render() {
     return (
       <div className="container App">
-        <Navbar currentUser={this.state.auth.currentUser} />
+        <Navbar currentUser={this.state.auth.currentUser} logOut={this.removeLoggedInUser} />
         <Switch>
           <Route path="/login" render={ (routerProps) => {
             return <Login history={routerProps.history} setUser={this.setLoggedInUser} />
           } } />
           <Route path="/paintings" render={ (routerProps) => {
-            return <PaintingsContainer />
+            return <PaintingsContainer authInfo={this.state.auth} />
           } } />
           <Route path="/404" component={CatchAll} />
           <Redirect from="/home" to="/" />

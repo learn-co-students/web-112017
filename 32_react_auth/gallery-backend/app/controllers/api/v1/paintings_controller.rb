@@ -1,7 +1,12 @@
 class Api::V1::PaintingsController < ApplicationController
 
   def index
-    @paintings = Painting.all
+    user = current_user
+    if user
+      @paintings = Painting.all
+    else
+      @paintings = [ Painting.all.sample() ]
+    end
     render json: @paintings
   end
 

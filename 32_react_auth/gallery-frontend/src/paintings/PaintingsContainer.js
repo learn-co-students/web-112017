@@ -12,15 +12,34 @@ class PaintingsContainer extends React.Component {
       filterName: "",
       filterDate: ""
     },
+    updating: true,
     paintings: []
   }
 
-  componentDidMount() {
+  getPaintings = () => {
     api.paintings.getPaintings().then(painting_data => {
       this.setState({
-        paintings: painting_data
+        paintings: painting_data,
+      }, () => {
+        this.setState({
+          updating: false
+        })
       })
     })
+  }
+
+  componentDidMount() {
+    this.getPaintings()
+  }
+
+  shouldComponentUpdate(newProps, newState) {
+    return this.state.updating !== newState.updating
+  }
+
+  componentDidUpdate() {
+    if (this.state.updating) {
+      this.getPaintings()
+    }
   }
 
   setFilter = (f) => {

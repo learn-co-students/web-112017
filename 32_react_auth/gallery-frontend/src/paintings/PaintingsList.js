@@ -15,6 +15,7 @@ const paintingComponents = (paintings, filter) => {
 }
 
 const PaintingsList = ({ paintings, filter }) => {
+  console.log("rerendering list")
   return (
     <div className="paintings-list row">
       { paintingComponents(paintings, filter) }

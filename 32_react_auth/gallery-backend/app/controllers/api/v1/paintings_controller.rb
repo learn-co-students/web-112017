@@ -3,6 +3,7 @@ class Api::V1::PaintingsController < ApplicationController
   def index
     user = current_user
     if user
+      puts "found user"
       @paintings = Painting.all
     else
       @paintings = [ Painting.all.sample() ]

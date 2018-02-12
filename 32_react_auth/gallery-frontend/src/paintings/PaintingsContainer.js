@@ -17,6 +17,7 @@ class PaintingsContainer extends React.Component {
   }
 
   getPaintings = () => {
+    console.log("getting")
     api.paintings.getPaintings().then(painting_data => {
       this.setState({
         paintings: painting_data,

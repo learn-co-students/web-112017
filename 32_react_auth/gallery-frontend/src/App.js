@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   removeLoggedInUser = () => {
-    localStorage.setItem('token', null)
+    localStorage.removeItem('token')
     this.setState({
       auth: { currentUser: null }
     })
